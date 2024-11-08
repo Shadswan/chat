@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/index.css">
+    <script src="/socket.io/socket.io.js"></script>
+    <title>Главная</title>
+</head>
+
+<body>
+
+    <!-- подключение к бд 
+    <?php
+    include 'connect.php';
+    ?>
+    -->
+    <!-- панель навигации  -->
+    <header>
+        <div class="logo">
+            <img src="/img/cloud.png" alt="logo">
+        </div>
+        <div>Анонимность</div>
+        <div></div>
+    </header>
+
+    <canvas id="canvas"></canvas><!-- холст -->
+
+    <div class="slice">
+        <!--Первый холст -->
+        <div>
+        </div>
+        <!-- контент -->
+        <div class="content">
+            <input id="nickname" placeholder="Введите ваш никнейм" />
+            <button class="button-23" id="findPartner">Найти собеседника</button>
+            <!--3десь будет происходить переписка, до поиска собеседника она скрыта -->
+            <ul class="messages" id="messages"></ul>
+            <div class="sendMsg">
+                <input id="msgInput" placeholder="Ваше сообщение" />
+                <button class="button-23" id="sendMsg">Отправить</button>
+            </div>
+        </div>
+        <!-- скрипт отправки соединения 
+        <?php
+        @$name = $_POST['message'];
+        $id = rand(1000, 9999);
+        ?>
+        -->
+        <script src="js/socket.js"> </script><!-- Websocket -->
+        <div></div><!-- второй холст -->
+    </div>
+
+    <!-- подвал -->
+    <footer>
+        <div id="userCount">Количество пользователей: 0</div> <!-- Элемент для отображения количества пользователей -->
+        <script>
+            const socket = io(); // Подключение к серверу
+
+            socket.on('updateUserCount', (count) => {
+                document.getElementById('userCount').textContent = `Количество пользователей: ${count}`;
+            });
+        </script>
+    </footer>
+    <script src="js/animation.js"></script>
+
+</body>
+
+</html>
